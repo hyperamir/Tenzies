@@ -16,8 +16,6 @@ function App() {
     const checkSameValue = dice.every(die => die.value === firstValue)
     if (checkIsHeld && checkSameValue) {
       setTenzies(true);
-      console.log(`end time: ${(new Date() - time) / 1000} seconds!`)
-      console.log('total times you pressed roll is: ', rollsNumber)
     }
   }, [dice])
 
