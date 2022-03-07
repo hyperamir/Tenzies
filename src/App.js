@@ -8,6 +8,7 @@ function App() {
   const [dice, setDice] = useState(allNewDice())
   const [tenzies, setTenzies] = useState(false)
   const [rollsNumber, setRollsNumber] = useState(0)
+  const [time, setTime] = useState(new Date())
 
   useEffect(() => {
     const checkIsHeld = dice.every(die => die.isHeld)
@@ -15,6 +16,7 @@ function App() {
     const checkSameValue = dice.every(die => die.value === firstValue)
     if (checkIsHeld && checkSameValue) {
       setTenzies(true);
+      console.log(`end time: ${(new Date() - time) / 1000} seconds!`)
       console.log('total times you pressed roll is: ', rollsNumber)
     }
   }, [dice])
@@ -47,6 +49,8 @@ function App() {
     } else {
       setDice(allNewDice())
       setTenzies(false)
+      setTime(new Date())
+      setRollsNumber(0)
     }
   }
 
@@ -70,7 +74,7 @@ function App() {
     <main>
       {tenzies && <Confetti />}
       <h1 className="title">Tenzies</h1>
-      {!tenzies ? <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p> : <h4 className='win'>YOU WON WITH {rollsNumber} TRY!</h4>}
+      {!tenzies ? <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p> : <h4 className='win'>YOU WON WITH {rollsNumber} TRIES IN {Math.round(((new Date() - time) / 1000)*100)/100} SECONDS!</h4>}
       <div className='dice-container'>
         {diceElements}
       </div>
