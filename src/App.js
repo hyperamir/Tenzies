@@ -7,6 +7,7 @@ import Confetti from 'react-confetti'
 function App() {
   const [dice, setDice] = useState(allNewDice())
   const [tenzies, setTenzies] = useState(false)
+  const [rollsNumber, setRollsNumber] = useState(0)
 
   useEffect(() => {
     const checkIsHeld = dice.every(die => die.isHeld)
@@ -14,7 +15,7 @@ function App() {
     const checkSameValue = dice.every(die => die.value === firstValue)
     if (checkIsHeld && checkSameValue) {
       setTenzies(true);
-      console.log('you won!')
+      console.log('total times you pressed roll is: ', rollsNumber)
     }
   }, [dice])
 
@@ -38,14 +39,15 @@ function App() {
   }
 
   function rollDice() {
-    if(!tenzies) {
+    if (!tenzies) {
+      setRollsNumber(prevRollsNumber => prevRollsNumber + 1)
       setDice(prevDice => prevDice.map(die => {
-      return !die.isHeld ? generateRandomDie() : die
-    }))
-   }else{
-     setDice(allNewDice())
-     setTenzies(false)
-   }
+        return !die.isHeld ? generateRandomDie() : die
+      }))
+    } else {
+      setDice(allNewDice())
+      setTenzies(false)
+    }
   }
 
   function holdDice(id) {
@@ -68,7 +70,7 @@ function App() {
     <main>
       {tenzies && <Confetti />}
       <h1 className="title">Tenzies</h1>
-      <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+      {!tenzies ? <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p> : <h4 className='win'>YOU WON WITH {rollsNumber} TRY!</h4>}
       <div className='dice-container'>
         {diceElements}
       </div>
