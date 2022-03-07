@@ -10,12 +10,14 @@ Tenzies is a SPA (Single Page Application) fun game. The App utilizes React and 
 
 - ### Screenshot 01
 
-![Screenshot 01]()
+![Screenshot 01](https://github.com/hyperamir/Tenzies/blob/main/docs/sh01.png?raw=true)
+
+
 
 
 - ### Screenshot 02
 
-![Screenshot 01]()
+![Screenshot 01](https://github.com/hyperamir/Tenzies/blob/main/docs/sh02.png?raw=true)
 
 
 
